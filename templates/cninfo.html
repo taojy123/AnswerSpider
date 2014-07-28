@@ -1,0 +1,38 @@
+% rebase('templates/base.html')
+
+
+<h2 class="sub-header">CNINFO 数据</h2>
+
+
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>提问</th>
+            <th>回答</th>
+            <th>链接</th>
+        </tr>
+    </thead>
+    <tbody>
+        % for r in rs:
+            <tr data-id="{{ r.id }}" >
+                <td>{{ r.question }}</td>
+                <td>{{ r.answer }}</td>
+                <td><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
+            </tr>
+        % end
+    </tbody>
+</table>
+
+
+
+<script>
+    $("#cninfo").addClass('active')
+    $(".tablesorter").tablesorter({
+        widgets: ['zebra']
+    })
+    
+    $(function(){
+
+    })
+
+</script>

@@ -1,0 +1,49 @@
+% rebase('templates/base.html')
+
+
+<h2 class="sub-header">抓取数据</h2>
+
+<li>
+    <a href="http://irm.cninfo.com.cn/ircs/sse/sseSubIndex.do?condition.type=5" target="_blank">
+        http://irm.cninfo.com.cn/ircs/sse/sseSubIndex.do?condition.type=5
+    </a>
+</li>
+<li>
+    <a href="http://sns.sseinfo.com/" target="_blank">
+        http://sns.sseinfo.com/
+    </a>
+</li>
+<p>自动循环抓取最新回答数据</p>
+
+<button type="button" class="btn btn-primary" id="start" style="margin-top:20px">启动爬虫</button>
+
+<div id="output" style="margin-top:30px">
+    <!-- output.html goes here -->
+</div>
+
+
+<script>
+    $("#index").addClass('active')
+    
+    $(function(){
+        function get_data(){
+            $.ajax({
+                url: '/get_data',
+            })
+            .done(function(msg) {
+                $("#output").append(msg)
+            })
+            .fail(function(msg) {
+                $("#output").append(msg)
+            })
+            
+        }
+
+        $("#start").click(function() {
+            $("#start").remove()
+            get_data()
+            setInterval(get_data, 60000)
+        })
+
+    })
+</script>
