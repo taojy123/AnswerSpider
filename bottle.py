@@ -53,8 +53,8 @@ try: from simplejson import dumps as json_dumps, loads as json_lds
 except ImportError: # pragma: no cover
     try: from json import dumps as json_dumps, loads as json_lds
     except ImportError:
-        try: from django.utils.simplejson import dumps as json_dumps, loads as json_lds
-        except ImportError:
+        # try: from django.utils.simplejson import dumps as json_dumps, loads as json_lds   # ===== Taojy comment up ======
+        # except ImportError:                                                               # ===== Taojy comment up ======
             def json_dumps(data):
                 raise ImportError("JSON support requires Python 2.6 or simplejson.")
             json_lds = json_dumps
@@ -3608,5 +3608,28 @@ if __name__ == '__main__':
 
 
 
-
+# ======= Taojy add ===============
+try:
+    import email.mime.audio
+    import email.mime.base
+    import email.mime.image
+    import email.mime.message
+    import email.mime.multipart
+    import email.mime.nonmultipart
+    import email.mime.text
+    import email.charset
+    import email.encoders
+    import email.errors
+    import email.feedparser
+    import email.generator
+    import email.header
+    import email.iterators
+    import email.message
+    import email.parser
+    import email.utils
+    import email.base64mime
+    import email.quoprimime
+except:
+    pass
+# =================================
 # THE END

@@ -13,7 +13,8 @@ class QA(Model):
     	text_show = text
     	keywords = Config.get().keywords
     	for keyword in keywords.split(","):
-    		text_show = text_show.replace(keyword, "<b style='color:red'>%s</b>"%keyword)
+            if keyword:
+    		  text_show = text_show.replace(keyword, "<b style='color:red'>%s</b>"%keyword)
     	return text_show
 
     @property

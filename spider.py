@@ -15,8 +15,8 @@ from BeautifulSoup import BeautifulSoup
 
 
 cj = cookielib.CookieJar()
-#opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
-opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj), urllib2.ProxyHandler({'http':"10.239.120.37:911"}))
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+#opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj), urllib2.ProxyHandler({'http':"10.239.120.37:911"}))
 opener.addheaders = [
                     ('User-agent', 'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1'),
                      ]

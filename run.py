@@ -1,9 +1,11 @@
 #coding=utf8
 
-import bottle
 from bottle import *
 from models import *
 from spider import get_cn_data, get_sse_data
+import sys
+import os
+import webbrowser
 
 
 if not Config.gets():
@@ -69,4 +71,13 @@ def server_static(filepath):
 
 
 
+if os.path.isfile("temp"):
+    os.remove("temp")
+    webbrowser.open_new_tab('http://127.0.0.1:8000')
+else:
+    open("temp", "w").write("temp")
+
+
+
 run(host='0.0.0.0', port="8000", debug=True)
+
