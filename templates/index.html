@@ -42,7 +42,7 @@
         $("#start").click(function() {
             $("#start").remove()
             get_data()
-            setInterval(get_data, 60000)
+            setInterval(get_data, {{ interval }} * 1000)
         })
 
     })

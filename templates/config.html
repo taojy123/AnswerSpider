@@ -1,0 +1,28 @@
+% rebase('templates/base.html')
+
+
+<h2 class="sub-header">参数设置</h2>
+
+<form action="/set_config" method="POST">
+  <div class="form-group">
+    <label>采集间隔设定(秒)</label>
+    <input type="text" class="form-control" name="interval" value="{{ !interval }}">
+  </div>
+  <div class="form-group">
+    <label>关键词设定(多个词间以逗号分隔)</label>
+    <textarea class="form-control" name="keywords" style="height:100px">{{ !keywords }}</textarea>
+  </div>
+  <button type="submit" class="btn btn-default">提交设定</button>
+</form>
+
+
+
+
+<script>
+    $("#config").addClass('active')
+    
+    $(function(){
+
+
+    })
+</script>

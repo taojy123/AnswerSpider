@@ -1,7 +1,7 @@
 % rebase('templates/base.html')
 
 
-<h2 class="sub-header">SSEINFO 数据</h2>
+<h2 class="sub-header">SSEINFO 问答</h2>
 
 
 <table class="tablesorter">
@@ -15,8 +15,8 @@
     <tbody>
         % for r in rs:
             <tr data-id="{{ r.id }}" >
-                <td>{{ r.question }}</td>
-                <td>{{ r.answer }}</td>
+                <td>{{ !r.question_show }}</td>
+                <td>{{ !r.answer_show }}</td>
                 <!--<td><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>-->
             </tr>
         % end
