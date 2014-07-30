@@ -32,6 +32,7 @@
             })
             .done(function(msg) {
                 $("#output").append(msg)
+                scroll(0, 500000)
             })
             .fail(function(msg) {
                 $("#output").append(msg)

@@ -1,5 +1,5 @@
 from nanorm import *
-
+import time
 
 set_db_name("data.db")
 
@@ -8,6 +8,8 @@ class QA(Model):
     question = CharField()
     answer = CharField()
     url = CharField()
+    time = CharField()
+
 
     def text_show(self, text):
     	text_show = text
@@ -24,6 +26,15 @@ class QA(Model):
     @property
     def answer_show(self):
     	return self.text_show(self.answer)
+
+    # overwrite
+    def save(self):
+        now = time.strftime("%Y-%m-%d %H:%M:%S")
+        self.time = now
+        super(QA, self).save()
+
+
+
 
 
 class Config(Model):

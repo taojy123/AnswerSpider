@@ -9,6 +9,7 @@
         <tr>
             <th>提问</th>
             <th>回答</th>
+            <th>采集时间</th>
             <th>链接</th>
         </tr>
     </thead>
@@ -17,6 +18,7 @@
             <tr data-id="{{ r.id }}" >
                 <td>{{ !r.question_show }}</td>
                 <td>{{ !r.answer_show }}</td>
+                <td style="width:110px">{{ !r.time }}</td>
                 <td><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
             </tr>
         % end

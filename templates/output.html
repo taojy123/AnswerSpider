@@ -1,10 +1,12 @@
-
+<!--
 <p>--------------------</p>
-
+-->
 % for qa in rs:
 
 <p>
-    {{ !qa.origin }}:
+    {{ !qa.origin }} 
+    {{ !qa.time }}
+    :
     {{ !qa.question_show }}
     {{ !qa.answer_show }}
 </p>
