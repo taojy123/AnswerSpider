@@ -9,7 +9,7 @@ import webbrowser
 
 
 if not Config.gets():
-    Config(interval=60, keywords="").save()
+    Config(interval=60, keywords="", keysize=20).save()
 
 @route("/")
 @route("/index")
@@ -17,7 +17,6 @@ if not Config.gets():
 def index():
     c = Config.get()
     interval = c.interval
-    keywords = c.keywords
     return locals()
 
 
@@ -49,6 +48,7 @@ def config():
     c = Config.get()
     interval = c.interval
     keywords = c.keywords
+    keysize = c.keysize
     return locals()
 
 
@@ -56,9 +56,11 @@ def config():
 def set_config():
     interval = request.params.interval
     keywords = request.params.keywords
+    keysize = request.params.keysize
     c = Config.get()
     c.interval = int(interval)
     c.keywords = keywords.replace(" ", ",").replace(u"\uff0c", ",")
+    c.keysize = int(keysize)
     c.save()
     redirect("/config")
 

@@ -13,10 +13,11 @@ class QA(Model):
 
     def text_show(self, text):
     	text_show = text
-    	keywords = Config.get().keywords
+        keywords = Config.get().keywords
+        keysize = Config.get().keysize
     	for keyword in keywords.split(","):
             if keyword:
-    		  text_show = text_show.replace(keyword, "<b style='color:red'>%s</b>"%keyword)
+    		  text_show = text_show.replace(keyword, "<b style='color:red;font-size:%dpx;'>%s</b>" % (keysize, keyword) )
     	return text_show
 
     @property
@@ -40,4 +41,5 @@ class QA(Model):
 class Config(Model):
     interval = IntegerField()
     keywords = CharField()
+    keysize = IntegerField()
         

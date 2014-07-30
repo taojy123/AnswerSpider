@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        % for r in rs[:100]:
+        % for r in rs:
             <tr data-id="{{ r.id }}" >
                 <td>{{ !r.question_show }}</td>
                 <td>{{ !r.answer_show }}</td>
@@ -33,8 +33,5 @@
         widgets: ['zebra']
     })
     
-    $(function(){
-        alert("此为测试版，只保留最新的100条记录")
-    })
 
 </script>
