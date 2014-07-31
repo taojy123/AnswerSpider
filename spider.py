@@ -31,7 +31,7 @@ def get_page(url, data=None):
             page = resp.read()
             return page
         except:
-            traceback.print_exc()
+            #traceback.print_exc()
             time.sleep(2)
             print "Try after 2 seconds ..."
             continue
@@ -66,6 +66,7 @@ def get_cn_data():
         answer = answer.getText()
         url = "http://irm.cninfo.com.cn/ircs/interaction/" + alink.get("href")
         if not QA.gets(question=question, answer=answer):
+        #if not QA.gets(url=url):
             qa = QA()
             qa.origin = "CN"
             qa.question = question
@@ -95,6 +96,7 @@ def get_sse_data():
         answer = answer.getText()
         url = "http://sns.sseinfo.com/?" + item_id
         if not QA.gets(question=question, answer=answer):
+        #if not QA.gets(url=url):
             qa = QA()
             qa.origin = "SSE"
             qa.question = question

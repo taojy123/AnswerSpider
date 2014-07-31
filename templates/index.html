@@ -28,7 +28,7 @@
     $(function(){
         function get_data(){
             $.ajax({
-                url: '/get_data',
+                url: '/get_data?t=' + (new Date().getTime()),
             })
             .done(function(msg) {
                 $("#output").append(msg)
