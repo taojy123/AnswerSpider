@@ -12,21 +12,30 @@ class QA(Model):
 
 
     def text_show(self, text):
-    	text_show = text
+        text_show = text
         keywords = Config.get().keywords
         keysize = Config.get().keysize
-    	for keyword in keywords.split(","):
+        for keyword in keywords.split(","):
             if keyword:
-    		  text_show = text_show.replace(keyword, "<b style='color:red;font-size:%dpx;'>%s</b>" % (keysize, keyword) )
-    	return text_show
+                text_show = text_show.replace(keyword, "<b style='color:red;font-size:%dpx;'>%s</b>" % (keysize, keyword) )
+        return text_show
 
     @property
     def question_show(self):
-    	return self.text_show(self.question)
+        return self.text_show(self.question)
 
     @property
     def answer_show(self):
-    	return self.text_show(self.answer)
+        return self.text_show(self.answer)
+
+    @property
+    def keyword_class(self):
+        text = self.question + self.answer
+        keywords = Config.get().keywords
+        for keyword in keywords.split(","):
+            if keyword and keyword in text:
+                return "has_keyword"
+        return "none_keyword"
 
     # overwrite
     def save(self):

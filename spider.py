@@ -41,6 +41,7 @@ def get_page(url, data=None):
 
 CN_URL = "http://irm.cninfo.com.cn/ircs/interaction/lastRepliesForSzse.do?pageNo=1"
 SSE_URL = "http://sns.sseinfo.com/ajax/feeds.do?type=11&pageSize=30&lastid=-1&show=1&page=1"
+TGB_URL = "http://www.taoguba.com.cn/index?blockID=1"
 
 
 def get_cn_data():
@@ -59,22 +60,26 @@ def get_cn_data():
     # boxs += p3.findAll("div", {"class": "msgCnt gray666"})
 
     for i in range(len(boxs)-1, 0, -2):
-        question = boxs[i-1]
-        answer = boxs[i]
-        alink = answer.find("a", {"class": "cntcolor"})
-        question = question.getText()
-        answer = answer.getText()
-        url = "http://irm.cninfo.com.cn/ircs/interaction/" + alink.get("href")
-        if not QA.gets(question=question, answer=answer):
-        #if not QA.gets(url=url):
-            qa = QA()
-            qa.origin = "CN"
-            qa.question = question
-            qa.answer = answer
-            qa.url = url
-            qa.save()
-            rs.append(qa)
-            print qa.id
+        try:
+            question = boxs[i-1]
+            answer = boxs[i]
+            alink = answer.find("a", {"class": "cntcolor"})
+            question = question.getText()
+            answer = answer.getText()
+            url = "http://irm.cninfo.com.cn/ircs/interaction/" + alink.get("href")
+            if not QA.gets(question=question, answer=answer):
+            #if not QA.gets(url=url):
+                qa = QA()
+                qa.origin = "CN"
+                qa.question = question
+                qa.answer = answer
+                qa.url = url
+                qa.save()
+                rs.append(qa)
+                print qa.id
+        except:
+            print "e"
+            
     return rs
 
 
@@ -88,29 +93,68 @@ def get_sse_data():
     items = items[::-1]
 
     for item in items:
-        txts = item.findAll("div", {"class": "m_feed_txt"})
-        question = txts[0]
-        answer = txts[1]
-        item_id = item.get("id")
-        question = question.getText()
-        answer = answer.getText()
-        url = "http://sns.sseinfo.com/?" + item_id
-        if not QA.gets(question=question, answer=answer):
-        #if not QA.gets(url=url):
-            qa = QA()
-            qa.origin = "SSE"
-            qa.question = question
-            qa.answer = answer
-            qa.url = url
-            qa.save()
-            rs.append(qa)
-            print qa.id
+        try:
+            txts = item.findAll("div", {"class": "m_feed_txt"})
+            question = txts[0]
+            answer = txts[1]
+            item_id = item.get("id")
+            question = question.getText()
+            answer = answer.getText()
+            url = "http://sns.sseinfo.com/?" + item_id
+            if not QA.gets(question=question, answer=answer):
+            #if not QA.gets(url=url):
+                qa = QA()
+                qa.origin = "SSE"
+                qa.question = question
+                qa.answer = answer
+                qa.url = url
+                qa.save()
+                rs.append(qa)
+                print qa.id
+        except:
+            print "e"
+
     return rs
 
 
+def get_tgb_data():
+    print "Get TGB"
+    rs = []
+    p = get_page(TGB_URL)
+    p = BeautifulSoup(p)
+    p_list = p.find("div", {"class": "p_list"})
+    ps = p_list.findAll("div")
+    for p in ps:
+        try:
+            a = p.find("a")
+            title = a.get("title")
+            try:
+                t = BeautifulSoup(title)
+                title = t.getText()
+            except:
+                pass
+            url = "http://www.taoguba.com.cn/" + a.get("href")
+            if not QA.gets(url=url):
+                qa = QA()
+                qa.origin = "TGB"
+                qa.question = title
+                qa.url = url
+                qa.save()
+                rs.append(qa)
+                print qa.id
+        except:
+            print "e"
+
+    return rs
+
+
+
+
 if __name__ == "__main__":
-    rs = get_cn_data()
+    rs = []
+    rs += get_cn_data()
     rs += get_sse_data()
+    rs += get_tgb_data()
     print rs
 
 

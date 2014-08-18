@@ -2,7 +2,7 @@
 
 from bottle import *
 from models import *
-from spider import get_cn_data, get_sse_data
+from spider import get_cn_data, get_sse_data, get_tgb_data
 import sys
 import os
 import webbrowser
@@ -34,11 +34,20 @@ def sseinfo():
     return locals()
 
 
+@route("/tgbinfo")
+@view("templates/tgbinfo")
+def tgbinfo():
+    rs = QA.query().filter(origin="TGB").order("-id").all()
+    return locals()
+
+
 @route("/get_data")
 @view("templates/output")
 def get_data():
-    rs = get_cn_data()
+    rs = []
+    rs += get_cn_data()
     rs += get_sse_data()
+    rs += get_tgb_data()
     return locals()
 
 
