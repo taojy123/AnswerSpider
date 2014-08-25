@@ -134,10 +134,13 @@ def get_tgb_data():
             except:
                 pass
             url = "http://www.taoguba.com.cn/" + a.get("href")
+            name = p.find("li", {"class": "pcdj08"}).getText()
+            time = p.find("li", {"class": "pcdj06"}).getText()
             if not QA.gets(url=url):
                 qa = QA()
                 qa.origin = "TGB"
                 qa.question = title
+                qa.answer = "%s, %s" %(name, time)
                 qa.url = url
                 qa.save()
                 rs.append(qa)

@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>标题</th>
+            <th>笔名 发布时间</th>
             <th>采集时间</th>
             <th>链接</th>
         </tr>
@@ -16,6 +17,7 @@
         % for r in rs:
             <tr data-id="{{ r.id }}" class="{{ r.keyword_class }}">
                 <td>{{ !r.question_show }}</td>
+                <td>{{ !r.answer_show }}</td>
                 <td style="width:110px">{{ !r.time }}</td>
                 <td><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
             </tr>

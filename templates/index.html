@@ -22,9 +22,24 @@
 
 <button type="button" class="btn btn-primary" id="start" style="margin-top:20px">启动爬虫</button>
 
-<div id="output" style="margin-top:30px">
-    <!-- output.html goes here -->
-</div>
+
+
+
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>站点</th>
+            <th>标题</th>
+            <th>回答</th>
+            <th>采集时间</th>
+            <th>链接</th>
+        </tr>
+    </thead>
+    <tbody id="output">
+        <!-- output.html goes here -->
+    </tbody>
+</table>
+
 
 
 <script>
@@ -37,10 +52,19 @@
             })
             .done(function(msg) {
                 $("#output").append(msg)
+                $(".tablesorter").tablesorter({
+                    widgets: ['zebra']
+                })
+
+                var visable = $("#toggle_keyword").attr("data-visible")
+                if(visable == "none"){
+                  $(".none_keyword").hide()
+                }
+                else{
+                  $(".none_keyword").show()
+                }
+
                 scroll(0, 500000)
-            })
-            .fail(function(msg) {
-                $("#output").append(msg)
             })
             
         }
@@ -49,6 +73,10 @@
             $("#start").remove()
             get_data()
             setInterval(get_data, {{ interval }} * 1000)
+        })
+
+        $(".tablesorter").tablesorter({
+            widgets: ['zebra']
         })
 
     })

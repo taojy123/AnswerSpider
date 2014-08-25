@@ -1,13 +1,11 @@
 
-
-% for qa in rs:
-
-<p>
-    {{ !qa.origin }} 
-    {{ !qa.time }}
-    :
-    {{ !qa.question_show }}
-    {{ !qa.answer_show }}
-</p>
-
+% for r in rs:
+    <tr data-id="{{ r.id }}" class="{{ r.keyword_class }}">
+        <td>{{ !r.origin }}</td>
+        <td>{{ !r.question_show }}</td>
+        <td>{{ !r.answer_show }}</td>
+        <td style="width:110px">{{ !r.time }}</td>
+        <td><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
+    </tr>
 % end
+
